@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  event_bus:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+  logs:
+    image:
+      docker.elastic.co/logstash/logstash-oss:8.4.3-amd64
+    ports:
+      - 5044:5044
+      - 3101:8080
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
